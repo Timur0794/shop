@@ -25,6 +25,7 @@ services:
 
   db:
       image: mysql:8.0.31
+      restart: always
       volumes:
           - ./tmp/db:/var/lib/mysql
       environment:
