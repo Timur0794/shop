@@ -44,8 +44,8 @@
                             </tr>
                             </thead>
                             <tbody>
+                            @foreach($categories as $category)
                             <tr>
-                                @foreach($categories as $category)
                                     <td>{{$category->id}}</td>
                                     <td><a href="{{route('category.edit', $category->id)}}">{{$category->title}}</a></td>
                                     <td>
@@ -57,8 +57,8 @@
                                             </button>
                                         </form>
                                     </td>
-                                @endforeach
                             </tr>
+                            @endforeach
                             </tbody>
                         </table>
                     </div>
