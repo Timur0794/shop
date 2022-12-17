@@ -7,5 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tag extends Model
 {
+    protected $guarded = false;
+    protected $table = 'tags';
     use HasFactory;
 }

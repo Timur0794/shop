@@ -157,13 +157,13 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="pages/gallery.html" class="nav-link">
+                        <a href="{{route('tag.index')}}" class="nav-link">
                             <i class="fas fa-tags"></i>
                             <p>Теги</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="pages/gallery.html" class="nav-link">
+                        <a href="{{route('color.index')}}" class="nav-link">
                             <i class="fas fa-tint"></i>
                             <p>Цвета</p>
                         </a>
