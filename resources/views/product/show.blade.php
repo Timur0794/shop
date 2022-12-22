@@ -20,7 +20,8 @@
         <div class="container-fluid">
             <div class="row col-12 d-flex">
                 <div>
-                <a href="{{route('product.edit', $product->id)}}" class="btn btn-block btn-primary">Редактировать</a>
+                    <a href="{{route('product.edit', $product->id)}}"
+                       class="btn btn-block btn-primary">Редактировать</a>
                 </div>
                 <form action="{{route('product.delete', $product->id)}}" method="post">
                     @csrf
@@ -33,7 +34,7 @@
             <div class="row">
                 <div class="card w-auto">
                     <div class="card-header">
-                        <h3 class="card-title">Пользователи</h3>
+                        <h3 class="card-title">Продукт</h3>
                         <div class="card-tools">
                             <div class="input-group input-group-sm" style="width: 250px;">
                             </div>
@@ -48,35 +49,45 @@
                                 <td>{{$product->id}}</td>
                             </tr>
                             <tr>
-                                <td>Имя</td>
+                                <td>Название продукта</td>
                                 <td>{{$product->title}}</td>
                             </tr>
                             <tr>
-                                <td>Фамилия</td>
+                                <td>Описание</td>
                                 <td>{{$product->description}}</td>
                             </tr>
                             <tr>
-                                <td>Отчество</td>
-                                <td>{{$product->patronymic}}</td>
+                                <td>Контент</td>
+                                <td>{{$product->content}}</td>
                             </tr>
                             <tr>
-                                <td>Email</td>
-                                <td>{{$product->email}}</td>
+                                <td>price</td>
+                                <td>{{$product->price}}</td>
                             </tr>
                             <tr>
-                                <td>Возраст</td>
-                                <td>{{$product->age}}</td>
+                                <td>Остаток на складе</td>
+                                <td>{{$product->count}}</td>
                             </tr>
                             <tr>
-                                <td>Пол</td>
-                                <td>{{$product->genderTitle}}</td>
+                                <td>Категория</td>
+                                <td>{{$product->category->title}}</td>
                             </tr>
                             <tr>
-                                <td>Адрес</td>
-                                <td>{{$product->address}}</td>
+                                <td>Цвет</td>
+                                @foreach($product->colors as $prodColor)
+                                    <td>
+                                        <div style="width: 16px; height: 16px; background: {{$prodColor->title}}"></div>
+                                    </td>
+                                @endforeach
                             </tr>
                             </tbody>
                         </table>
+                        <div class="form-group">
+                            <label>Превью</label>
+                            <div><img src="{{url('storage/' . $product->preview_image)}}" alt="preview_image"
+                                      class="w-50">
+                            </div>
+                        </div>
                     </div>
                     <!-- /.card-body -->
                 </div>

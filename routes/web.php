@@ -56,3 +56,7 @@ Route::group(['prefix' => 'products'], function (){
    Route::patch('/{product}',\App\Http\Controllers\Product\UpdateController::class)->name('product.update');
    Route::delete('/{product}',\App\Http\Controllers\Product\DeleteController::class)->name('product.delete');
 });
+
+Route::get('/foo', function () {
+    Artisan::call('storage:link');
+});

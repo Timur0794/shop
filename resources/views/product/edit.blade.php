@@ -18,23 +18,83 @@
     <!-- Main content -->
     <div class="row">
         <div class="col-12">
-            <form action="{{route('product.update')}}" class="w-25" method="POST">
+            <form action="{{route('product.update', $product->id)}}" class="w-25" method="POST"
+                  enctype="multipart/form-data">
                 @csrf
-                @method('POST')
+                @method('patch')
                 <div class="form-group">
-                    <input type="text" class="form-control" value="{{old('title')}}" name="title" placeholder="Название">
+                    <input type="text" class="form-control" value="{{$product->title}}" name="title"
+                           placeholder="Название">
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" value="{{old('description')}}" name="description" placeholder="Описание">
+                    <input type="text" class="form-control" value="{{$product->description}}" name="description"
+                           placeholder="Описание">
                 </div>
                 <div class="form-group">
-                    <textarea name="content"  cols="30" class="form-control" rows="10" placeholder="Контент"></textarea>
+                    <label>выберите превью</label>
+                    <div class="input-group">
+                        <div class="form-group">
+                            <img src="{{url('storage/' . $product->preview_image)}}" alt="preview_image" class="w-50">
+                        </div>
+                        <div class="custom-file">
+                            <input name="preview_image" type="file" class="custom-file-input" id="exampleInputFile">
+                            <label class="custom-file-label" for="exampleInputFile">выберите изображение</label>
+                        </div>
+                        <div class="input-group-append">
+                            <span class="input-group-text">Загрузка</span>
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" value="{{old('price')}}" name="price'" placeholder="Цена">
+                    <textarea name="content" cols="30" class="form-control" rows="10"
+                              placeholder="{{$product->content}}"></textarea>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" value="{{old('count')}}" name="count" placeholder="Количество на складе">
+                    <input type="text" class="form-control" value="{{$product->price}}" name="price" placeholder="Цена">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" value="{{$product->count}}" name="count"
+                           placeholder="Количество на складе">
+                </div>
+                <div class="form-group">
+                    <label>Категория</label>
+                    <select name="category_id" class="form-control select2" style="width: 100%;">
+                        @foreach($categories as $category)
+                            <option value="{{$category->id}}"
+                                {{$category->id == $product->category->id ? 'selected': ''}}
+                            >{{$category->title}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Теги</label>
+                    <div class="select2-purple">
+                        <select name="tags[]" class="tags" multiple="multiple" data-placeholder="выберите тег"
+                                data-dropdown-css-class="select2-purple" style="width: 100%;">
+                            @foreach($tags as $tag)
+                                @foreach($product->tags as $prodTag)
+                                <option
+                                    value="{{$tag->id}}"
+                                    {{$tag->id == $prodTag->id ? 'selected': ''}}
+                                >{{$tag->title}}
+                                </option>
+                            @endforeach
+
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Выберите цвет</label>
+                    <select name="colors[]" class="colors" multiple="multiple" data-placeholder="Выберите цвет"
+                            style="width: 100%;">
+                        @foreach($colors as $color)
+                            @foreach($product->colors as $prodColor)
+                            <option {{$color->id == $prodColor ->id ? 'selected' : ''}}
+                                value="{{$color->id}}">{{$color->title}}</option>
+                            @endforeach
+                        @endforeach
+                    </select>
                 </div>
                 <input type="submit" class="btn btn-primary" value="Добавить">
             </form>

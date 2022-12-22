@@ -49,7 +49,7 @@
                                 <tr>
                                     <td>{{$color->id}}</td>
                                     <td><a href="{{route('color.edit', $color->id)}}">{{$color->title}}</a></td>
-                                    <td><div style="width: 16px; height: 16px; background: {{'#' . $color->title}}"></div></td>
+                                    <td><div style="width: 16px; height: 16px; background: {{$color->title}}"></div></td>
                                     <td>
                                         <form action="{{route('color.delete', $color->id)}}" method="post">
                                             @csrf

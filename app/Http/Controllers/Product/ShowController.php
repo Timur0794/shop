@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 class ShowController extends BaseController
 {
     public function __invoke(Product $product)
+
     {
         return view('product.show', compact('product'));
     }
